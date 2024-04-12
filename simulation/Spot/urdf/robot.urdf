@@ -1,0 +1,976 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="Spot">
+
+  <link
+    name="chasiss">
+    <inertial>
+      <origin
+        xyz="0.00052651 -3.5116E-07 0.0033972"
+        rpy="0 0 0" />
+      <mass
+        value="2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/chasiss.STL" />
+      </geometry>
+      <material
+        name="chasiss">
+        <color
+          rgba="0.376 0.376 0.376 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/chasiss.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="FR_upper_knee">
+    <inertial>
+      <origin
+        xyz="0.054284 -0.0047809 -0.038682"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FR_upper_knee.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FR_upper_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_fr_upper_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.24844 -0.1735 0.007712"
+      rpy="0 0 0" />
+    <parent
+      link="chasiss" />
+    <child
+      link="FR_upper_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FR_lower_knee">
+    <inertial>
+      <origin
+        xyz="-0.065794 0.0025629 -0.07831"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FR_lower_knee.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FR_lower_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fr_lower_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.086649 -0.008 -0.067764"
+      rpy="0 0 0" />
+    <parent
+      link="FR_upper_knee" />
+    <child
+      link="FR_lower_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FR_upper_hip">
+    <inertial>
+      <origin
+        xyz="-0.06045 -0.0047809 -0.028086"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FR_upper_hip.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FR_upper_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_fr_upper_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.19775 -0.1735 0.0069919"
+      rpy="0 0 0" />
+    <parent
+      link="chasiss" />
+    <child
+      link="FR_upper_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FR_lower_hip">
+    <inertial>
+      <origin
+        xyz="0.079671 -0.0024606 -0.127"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FR_lower_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FR_lower_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fr_lower_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.097594 -0.01 -0.050749"
+      rpy="0 0 0" />
+    <parent
+      link="FR_upper_hip" />
+    <child
+      link="FR_lower_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BR_upper_knee">
+    <inertial>
+      <origin
+        xyz="0.054328 -0.0047809 -0.038621"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BR_upper_knee.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BR_upper_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_br_upper_knee_joint"
+    type="revolute">
+    <origin
+      xyz="-0.19756 -0.1735 0.007712"
+      rpy="0 0 0" />
+    <parent
+      link="chasiss" />
+    <child
+      link="BR_upper_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BR_lower_knee">
+    <inertial>
+      <origin
+        xyz="-0.065776 0.0025629 -0.078325"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BR_lower_knee.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BR_lower_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="br_lower_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.086726 -0.008 -0.067666"
+      rpy="0 0 0" />
+    <parent
+      link="BR_upper_knee" />
+    <child
+      link="BR_lower_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BR_upper_hip">
+    <inertial>
+      <origin
+        xyz="-0.060388 -0.0047809 -0.02822"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BR_upper_hip.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BR_upper_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_br_upper_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.24756 -0.1735 0.007712"
+      rpy="0 0 0" />
+    <parent
+      link="chasiss" />
+    <child
+      link="BR_upper_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BR_lower_hip">
+    <inertial>
+      <origin
+        xyz="0.07915 -0.0024606 -0.12733"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BR_lower_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BR_lower_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="br_lower_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.097481 -0.01 -0.050966"
+      rpy="0 0 0" />
+    <parent
+      link="BR_upper_hip" />
+    <child
+      link="BR_lower_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FL_upper_knee">
+    <inertial>
+      <origin
+        xyz="0.054328 0.0047809 -0.038621"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FL_upper_knee.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FL_upper_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_fl_upper_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.24844 0.1735 0.007712"
+      rpy="0 0 0" />
+    <parent
+      link="chasiss" />
+    <child
+      link="FL_upper_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FL_lower_knee">
+    <inertial>
+      <origin
+        xyz="-0.065776 -0.0025629 -0.078325"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FL_lower_knee.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FL_lower_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fl_lower_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.086726 0.008 -0.067666"
+      rpy="0 0 0" />
+    <parent
+      link="FL_upper_knee" />
+    <child
+      link="FL_lower_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FL_upper_hip">
+    <inertial>
+      <origin
+        xyz="-0.060388 0.0047809 -0.02822"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FL_upper_hip.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FL_upper_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_fl_upper_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.19844 0.1735 0.007712"
+      rpy="0 0 0" />
+    <parent
+      link="chasiss" />
+    <child
+      link="FL_upper_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FL_lower_hip">
+    <inertial>
+      <origin
+        xyz="0.07915 0.0025394 -0.12733"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FL_lower_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/FL_lower_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fl_lower_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.097481 0.01 -0.050966"
+      rpy="0 0 0" />
+    <parent
+      link="FL_upper_hip" />
+    <child
+      link="FL_lower_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BL_upper_knee">
+    <inertial>
+      <origin
+        xyz="0.054328 0.0047809 -0.038621"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BL_upper_knee.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BL_upper_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_bl_upper_knee_joint"
+    type="revolute">
+    <origin
+      xyz="-0.19756 0.1735 0.007712"
+      rpy="0 0 0" />
+    <parent
+      link="chasiss" />
+    <child
+      link="BL_upper_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BL_lower_knee">
+    <inertial>
+      <origin
+        xyz="-0.065776 -0.0025629 -0.078325"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BL_lower_knee.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BL_lower_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="bl_lower_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.086726 0.008 -0.067666"
+      rpy="0 0 0" />
+    <parent
+      link="BL_upper_knee" />
+    <child
+      link="BL_lower_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BL_upper_hip">
+    <inertial>
+      <origin
+        xyz="-0.060388 0.0047809 -0.02822"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BL_upper_hip.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BL_upper_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_bl_upper_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.24756 0.1735 0.007712"
+      rpy="0 0 0" />
+    <parent
+      link="chasiss" />
+    <child
+      link="BL_upper_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BL_lower_hip">
+    <inertial>
+      <origin
+        xyz="0.07915 0.0025394 -0.12733"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BL_lower_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.752941176 0.752941176 0.752941176 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://Spot/meshes/BL_lower_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="bl_lower_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.097481 0.01 -0.050966"
+      rpy="0 0 0" />
+    <parent
+      link="BL_upper_hip" />
+    <child
+      link="BL_lower_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+</robot>
