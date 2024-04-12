@@ -1,0 +1,17 @@
+attrs==19.3.0
+gym==0.17.1
+mpi4py==3.0.3
+numpy==1.17.3
+pybullet==3.0.6
+typing==3.7.4.1
+tqdm~=4.66.1
+numba
+quadprog
+inputs
+scipy==1.7.3
+protobuf==3.20.0
+fabulous~=0.4.0
+matplotlib~=3.5.3
+setuptools~=68.0.0
+fabulous
+scikit-learn~=1.0.2
