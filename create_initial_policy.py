@@ -5,23 +5,23 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
 tuned_actions_spot = np.array([[0.5, 0.5, 0.5, 0.5,
-                                -0.02, -0.02, -0.02, -0.02,
-                                -0.2, -0.2, -0.2, -0.2],
+                                0, 0, 0, 0,
+                                0, 0, 0, 0],
 
                                [0.5, 0.5, 0.5, 0.5,
                                 0, 0, 0, 0,
-                                0.15, 0.15, 0.15, 0.15],
+                                0, 0, 0, 0],
 
                                [0.5, 0.5, 0.5, 0.5,
-                                -0.01, -0.01, -0.01, -0.01,
-                                -0.15, -0.15, -0.15, -0.15]
+                                0, 0, 0, 0,
+                                0, 0, 0, 0]
                                ])
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--robotName', help='the robot to be trained for', type=str, default='Spot')
-    parser.add_argument('--policyName', help='file name of the initial policy', type=str, default='IP_')
+    parser.add_argument('--policyName', help='file name of the initial policy', type=str, default='init_1504')
     args = parser.parse_args()
 
     if args.policyName == 'IP_':
@@ -45,7 +45,7 @@ if __name__ == "__main__":
                 for k in idx3:
                     t_r = 0
 
-                    env.set_randomization(default=True, idx1=i, idx2=j, idx3=k, idx0=0, idx11=0)
+                    env.set_randomization(default=True, idx1=i, idx2=j, idx3=k)
                     cstate = env.reset()
                     roll = 0
                     pitch = 0

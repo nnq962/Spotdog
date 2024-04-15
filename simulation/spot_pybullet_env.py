@@ -239,7 +239,7 @@ class SpotEnv(gym.Env):
 
             self.set_wedge_friction(0.7)
 
-        model_path = "simulation/Spot/urdf/robot.urdf"
+        model_path = "simulation/Spot1504/urdf/Spot1504.urdf"
         self.spot = self._pybullet_client.loadURDF(model_path, self.INIT_POSITION, self.INIT_ORIENTATION)
 
         self._joint_name_to_id, self._motor_id_list = self.build_motor_id_list()
@@ -469,11 +469,11 @@ class SpotEnv(gym.Env):
 
         action[:4] = (action[:4] + 1) / 2  # Step lengths are positive always
 
-        action[:4] = action[:4] * 2 * 0.068  # Max step length = 2x0.068
+        action[:4] = action[:4] * 2 * 0.075  # Max step length = 2x0.068
 
-        action[4:8] = np.clip(action[4:8], -0.04, 0)  # x_shift
+        action[4:8] = np.clip(action[4:8], -0.01, 0.03)  # x_shift
 
-        action[8:12] = action[8:12] * 0.045  # max y_shift = 0.045
+        action[8:12] = action[8:12] * 0.05  # max y_shift = 0.045
 
         return action
 
@@ -583,10 +583,6 @@ class SpotEnv(gym.Env):
             normal_estimator.vector_method_stoch2(self.prev_incline_vec, contact_info, self.get_motor_angles(), rot_mat)
         self.prev_incline_vec = plane_normal
 
-        print("support plane estimated roll:", np.degrees(self.support_plane_estimated_roll))
-        print("support plane estimated pitch:", np.degrees(self.support_plane_estimated_pitch))
-        print("--------------------------------------------")
-
         # line_id = self._pybullet_client.addUserDebugLine([0, 0, 0], plane_normal, lineColorRGB=[1, 0, 0], lineWidth=2)
         # if 'line_id' in globals():
         #     self._pybullet_client.removeUserDebugItem(line_id)
@@ -663,11 +659,11 @@ class SpotEnv(gym.Env):
                      + round(height_reward, 4) + 100 * round(step_distance_x, 4)
 
         # Penalize for standing at same position for continuous 150 steps
-        # self.step_disp.append(step_distance_x)
-        #
-        # if self._n_steps > 150:
-        #     if sum(self.step_disp) < 0.035:
-        #         reward = reward - standing_penalty
+        self.step_disp.append(step_distance_x)
+
+        if self._n_steps > 150:
+            if sum(self.step_disp) < 0.035:
+                reward = reward - standing_penalty
 
         return reward, done
 

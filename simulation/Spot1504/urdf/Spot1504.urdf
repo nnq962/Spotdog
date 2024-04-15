@@ -3,23 +3,22 @@
      Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot
-  name="Spot">
-
+  name="Spot1504">
   <link
-    name="chasiss">
+    name="BASE">
     <inertial>
       <origin
-        xyz="0.00052651 -3.5116E-07 0.0033972"
+        xyz="0.0011944095368826 -3.51164099354762E-07 0.00317711957900974"
         rpy="0 0 0" />
       <mass
         value="5" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="0.014239202621753"
+        ixy="6.74615081577306E-11"
+        ixz="2.55322930373711E-06"
+        iyy="0.0122637890177231"
+        iyz="-3.29110936316158E-07"
+        izz="0.0222992982471124" />
     </inertial>
     <visual>
       <origin
@@ -27,10 +26,10 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/chasiss.STL" />
+          filename="package://Spot1504/meshes/BASE.STL" />
       </geometry>
       <material
-        name="chasiss">
+        name="BODY">
         <color
           rgba="0.376 0.376 0.376 1" />
       </material>
@@ -41,7 +40,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/chasiss.STL" />
+          filename="package://Spot1504/meshes/BASE.STL" />
       </geometry>
     </collision>
   </link>
@@ -49,17 +48,17 @@
     name="FR_upper_knee">
     <inertial>
       <origin
-        xyz="0.054284 -0.0047809 -0.038682"
+        xyz="0.050518454394026 -0.00478086324288868 -0.0434850436726017"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="1.16540638853535E-05"
+        ixy="4.89995587506689E-20"
+        ixz="1.11058116991417E-05"
+        iyy="2.74850714706815E-05"
+        iyz="-4.45172679533679E-20"
+        izz="1.65095752794789E-05" />
     </inertial>
     <visual>
       <origin
@@ -67,7 +66,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FR_upper_knee.STL" />
+          filename="package://Spot1504/meshes/FR_upper_knee.STL" />
       </geometry>
       <material
         name="">
@@ -81,7 +80,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FR_upper_knee.STL" />
+          filename="package://Spot1504/meshes/FR_upper_knee.STL" />
       </geometry>
     </collision>
   </link>
@@ -89,10 +88,10 @@
     name="motor_fr_upper_knee_joint"
     type="revolute">
     <origin
-      xyz="0.24844 -0.1735 0.007712"
+      xyz="0.24911 -0.1735 0.0074919"
       rpy="0 0 0" />
     <parent
-      link="chasiss" />
+      link="BASE" />
     <child
       link="FR_upper_knee" />
     <axis
@@ -107,17 +106,17 @@
     name="FR_lower_knee">
     <inertial>
       <origin
-        xyz="-0.065794 0.0025629 -0.07831"
+        xyz="-0.073022 0.0025629 -0.071618"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="4.0431E-05"
+        ixy="3.4783E-21"
+        ixz="-3.9947E-05"
+        iyy="8.2323E-05"
+        iyz="-3.1857E-21"
+        izz="4.1982E-05" />
     </inertial>
     <visual>
       <origin
@@ -125,7 +124,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FR_lower_knee.STL" />
+          filename="package://Spot1504/meshes/FR_lower_knee.STL" />
       </geometry>
       <material
         name="">
@@ -139,7 +138,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FR_lower_knee.STL" />
+          filename="package://Spot1504/meshes/FR_lower_knee.STL" />
       </geometry>
     </collision>
   </link>
@@ -147,7 +146,7 @@
     name="fr_lower_knee_joint"
     type="revolute">
     <origin
-      xyz="0.086649 -0.008 -0.067764"
+      xyz="0.080087 -0.008 -0.075406"
       rpy="0 0 0" />
     <parent
       link="FR_upper_knee" />
@@ -165,17 +164,17 @@
     name="FR_upper_hip">
     <inertial>
       <origin
-        xyz="-0.06045 -0.0047809 -0.028086"
+        xyz="-0.0636621897477582 -0.00478086324289151 -0.0197531985787918"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="4.30727823440024E-06"
+        ixy="8.39979053782784E-21"
+        ixz="-5.80442871067772E-06"
+        iyy="2.74850714706814E-05"
+        iyz="-5.49959739681518E-21"
+        izz="2.38563609304322E-05" />
     </inertial>
     <visual>
       <origin
@@ -183,7 +182,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FR_upper_hip.STL" />
+          filename="package://Spot1504/meshes/FR_upper_hip.STL" />
       </geometry>
       <material
         name="">
@@ -197,7 +196,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FR_upper_hip.STL" />
+          filename="package://Spot1504/meshes/FR_upper_hip.STL" />
       </geometry>
     </collision>
   </link>
@@ -205,10 +204,10 @@
     name="motor_fr_upper_hip_joint"
     type="revolute">
     <origin
-      xyz="0.19775 -0.1735 0.0069919"
+      xyz="0.19911123518341 -0.173500351164098 0.00749192202401805"
       rpy="0 0 0" />
     <parent
-      link="chasiss" />
+      link="BASE" />
     <child
       link="FR_upper_hip" />
     <axis
@@ -223,17 +222,17 @@
     name="FR_lower_hip">
     <inertial>
       <origin
-        xyz="0.079671 -0.0024606 -0.127"
+        xyz="0.068122 -0.0024607 -0.13369"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="0.00018105"
+        ixy="7.7634E-14"
+        ixz="9.0902E-05"
+        iyy="0.00022949"
+        iyz="4.0144E-14"
+        izz="4.8973E-05" />
     </inertial>
     <visual>
       <origin
@@ -241,7 +240,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FR_lower_hip.STL" />
+          filename="package://Spot1504/meshes/FR_lower_hip.STL" />
       </geometry>
       <material
         name="hip">
@@ -255,7 +254,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FR_lower_hip.STL" />
+          filename="package://Spot1504/meshes/FR_lower_hip.STL" />
       </geometry>
     </collision>
   </link>
@@ -263,7 +262,7 @@
     name="fr_lower_hip_joint"
     type="revolute">
     <origin
-      xyz="-0.097594 -0.01 -0.050749"
+      xyz="-0.103501820756658 -0.010000000000002 -0.0372474576320085"
       rpy="0 0 0" />
     <parent
       link="FR_upper_hip" />
@@ -281,17 +280,17 @@
     name="BR_upper_knee">
     <inertial>
       <origin
-        xyz="0.054328 -0.0047809 -0.038621"
+        xyz="0.0505164736369484 -0.00478086324289045 -0.04348734469744"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="1.16550756150641E-05"
+        ixy="2.21099500908441E-20"
+        ixz="1.11060328172725E-05"
+        iyy="2.74850714706815E-05"
+        iyz="-1.87794137823906E-20"
+        izz="1.65085635497684E-05" />
     </inertial>
     <visual>
       <origin
@@ -299,7 +298,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BR_upper_knee.STL" />
+          filename="package://Spot1504/meshes/BR_upper_knee.STL" />
       </geometry>
       <material
         name="">
@@ -313,7 +312,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BR_upper_knee.STL" />
+          filename="package://Spot1504/meshes/BR_upper_knee.STL" />
       </geometry>
     </collision>
   </link>
@@ -321,10 +320,10 @@
     name="motor_br_upper_knee_joint"
     type="revolute">
     <origin
-      xyz="-0.19756 -0.1735 0.007712"
+      xyz="-0.196888764816585 -0.173500351164099 0.00749192202402094"
       rpy="0 0 0" />
     <parent
-      link="chasiss" />
+      link="BASE" />
     <child
       link="BR_upper_knee" />
     <axis
@@ -339,17 +338,17 @@
     name="BR_lower_knee">
     <inertial>
       <origin
-        xyz="-0.065776 0.0025629 -0.078325"
+        xyz="-0.0730201759131731 0.00256289190345438 -0.0716197354881452"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="4.04329569008625E-05"
+        ixy="-1.07000031676982E-21"
+        ixz="-3.99471670446998E-05"
+        iyy="8.23233038356787E-05"
+        iyz="-7.97144530293169E-22"
+        izz="4.19802164931309E-05" />
     </inertial>
     <visual>
       <origin
@@ -357,7 +356,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BR_lower_knee.STL" />
+          filename="package://Spot1504/meshes/BR_lower_knee.STL" />
       </geometry>
       <material
         name="">
@@ -371,7 +370,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BR_lower_knee.STL" />
+          filename="package://Spot1504/meshes/BR_lower_knee.STL" />
       </geometry>
     </collision>
   </link>
@@ -379,7 +378,7 @@
     name="br_lower_knee_joint"
     type="revolute">
     <origin
-      xyz="0.086726 -0.008 -0.067666"
+      xyz="0.0800840565833414 -0.00800000000000095 -0.0754091763723471"
       rpy="0 0 0" />
     <parent
       link="BR_upper_knee" />
@@ -397,17 +396,17 @@
     name="BR_upper_hip">
     <inertial>
       <origin
-        xyz="-0.060388 -0.0047809 -0.02822"
+        xyz="-0.0636609182771305 -0.00478086324289029 -0.0197572959101793"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="4.30802547489621E-06"
+        ixy="-3.93048566818105E-22"
+        ixz="-5.80568686420662E-06"
+        iyy="2.74850714706816E-05"
+        iyz="-3.82489004597207E-22"
+        izz="2.38556136899364E-05" />
     </inertial>
     <visual>
       <origin
@@ -415,7 +414,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BR_upper_hip.STL" />
+          filename="package://Spot1504/meshes/BR_upper_hip.STL" />
       </geometry>
       <material
         name="">
@@ -429,7 +428,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BR_upper_hip.STL" />
+          filename="package://Spot1504/meshes/BR_upper_hip.STL" />
       </geometry>
     </collision>
   </link>
@@ -437,10 +436,10 @@
     name="motor_br_upper_hip_joint"
     type="revolute">
     <origin
-      xyz="-0.24756 -0.1735 0.007712"
+      xyz="-0.246888764816864 -0.173500351164099 0.00749192202338655"
       rpy="0 0 0" />
     <parent
-      link="chasiss" />
+      link="BASE" />
     <child
       link="BR_upper_hip" />
     <axis
@@ -455,17 +454,17 @@
     name="BR_lower_hip">
     <inertial>
       <origin
-        xyz="0.07915 -0.0024606 -0.12733"
+        xyz="0.0681204718274993 -0.00246067050997739 -0.133691285042387"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="0.000181052841057738"
+        ixy="7.76337076345283E-14"
+        ixz="9.09007298789023E-05"
+        iyy="0.000229493455638044"
+        iyz="4.01441860388721E-14"
+        izz="4.89708342337639E-05" />
     </inertial>
     <visual>
       <origin
@@ -473,7 +472,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BR_lower_hip.STL" />
+          filename="package://Spot1504/meshes/BR_lower_hip.STL" />
       </geometry>
       <material
         name="hip">
@@ -487,7 +486,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BR_lower_hip.STL" />
+          filename="package://Spot1504/meshes/BR_lower_hip.STL" />
       </geometry>
     </collision>
   </link>
@@ -495,7 +494,7 @@
     name="br_lower_hip_joint"
     type="revolute">
     <origin
-      xyz="-0.097481 -0.01 -0.050966"
+      xyz="-0.103499423252635 -0.0100000000000007 -0.0372541190514647"
       rpy="0 0 0" />
     <parent
       link="BR_upper_hip" />
@@ -513,17 +512,17 @@
     name="FL_upper_knee">
     <inertial>
       <origin
-        xyz="0.054328 0.0047809 -0.038621"
+        xyz="0.0505184543940325 0.0047808632428905 -0.0434850436726002"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="1.16540638853539E-05"
+        ixy="-4.3163647891274E-20"
+        ixz="1.11058116991419E-05"
+        iyy="2.74850714706816E-05"
+        iyz="3.9967258801287E-20"
+        izz="1.65095752794787E-05" />
     </inertial>
     <visual>
       <origin
@@ -531,7 +530,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FL_upper_knee.STL" />
+          filename="package://Spot1504/meshes/FL_upper_knee.STL" />
       </geometry>
       <material
         name="">
@@ -545,7 +544,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FL_upper_knee.STL" />
+          filename="package://Spot1504/meshes/FL_upper_knee.STL" />
       </geometry>
     </collision>
   </link>
@@ -553,10 +552,10 @@
     name="motor_fl_upper_knee_joint"
     type="revolute">
     <origin
-      xyz="0.24844 0.1735 0.007712"
+      xyz="0.249111235183415 0.173499648835901 0.0074919220240201"
       rpy="0 0 0" />
     <parent
-      link="chasiss" />
+      link="BASE" />
     <child
       link="FL_upper_knee" />
     <axis
@@ -571,17 +570,17 @@
     name="FL_lower_knee">
     <inertial>
       <origin
-        xyz="-0.065776 -0.0025629 -0.078325"
+        xyz="-0.0730221776675222 -0.00256289190345093 -0.0716176945345108"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="4.0430723842824E-05"
+        ixy="6.92975957590118E-20"
+        ixz="-3.99471237361355E-05"
+        iyy="8.23233038356784E-05"
+        iyz="6.57450101834489E-20"
+        izz="4.19824495511691E-05" />
     </inertial>
     <visual>
       <origin
@@ -589,7 +588,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FL_lower_knee.STL" />
+          filename="package://Spot1504/meshes/FL_lower_knee.STL" />
       </geometry>
       <material
         name="">
@@ -603,7 +602,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FL_lower_knee.STL" />
+          filename="package://Spot1504/meshes/FL_lower_knee.STL" />
       </geometry>
     </collision>
   </link>
@@ -611,7 +610,7 @@
     name="fl_lower_knee_joint"
     type="revolute">
     <origin
-      xyz="0.086726 0.008 -0.067666"
+      xyz="0.0800874913210537 0.00799999999999891 -0.0754055285368097"
       rpy="0 0 0" />
     <parent
       link="FL_upper_knee" />
@@ -629,17 +628,17 @@
     name="FL_upper_hip">
     <inertial>
       <origin
-        xyz="-0.060388 0.0047809 -0.02822"
+        xyz="-0.0636621897477289 0.00478086324289043 -0.0197531985788137"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="4.30727823440718E-06"
+        ixy="3.95473126563017E-20"
+        ixz="-5.80442871068941E-06"
+        iyy="2.74850714706815E-05"
+        iyz="1.5421608516601E-20"
+        izz="2.38563609304253E-05" />
     </inertial>
     <visual>
       <origin
@@ -647,7 +646,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FL_upper_hip.STL" />
+          filename="package://Spot1504/meshes/FL_upper_hip.STL" />
       </geometry>
       <material
         name="">
@@ -661,7 +660,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FL_upper_hip.STL" />
+          filename="package://Spot1504/meshes/FL_upper_hip.STL" />
       </geometry>
     </collision>
   </link>
@@ -669,10 +668,10 @@
     name="motor_fl_upper_hip_joint"
     type="revolute">
     <origin
-      xyz="0.19844 0.1735 0.007712"
+      xyz="0.199111235183205 0.173499648835901 0.00749192202384069"
       rpy="0 0 0" />
     <parent
-      link="chasiss" />
+      link="BASE" />
     <child
       link="FL_upper_hip" />
     <axis
@@ -687,17 +686,17 @@
     name="FL_lower_hip">
     <inertial>
       <origin
-        xyz="0.07915 0.0025394 -0.12733"
+        xyz="0.0679802383452205 0.00253644265020351 -0.133412507188092"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="0.000183153689709637"
+        ixy="-2.84356229661283E-08"
+        ixz="9.19770254838388E-05"
+        iyy="0.000232135119675297"
+        iyz="5.58116886828029E-08"
+        izz="4.9513855955958E-05" />
     </inertial>
     <visual>
       <origin
@@ -705,7 +704,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FL_lower_hip.STL" />
+          filename="package://Spot1504/meshes/FL_lower_hip.STL" />
       </geometry>
       <material
         name="hip">
@@ -719,7 +718,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/FL_lower_hip.STL" />
+          filename="package://Spot1504/meshes/FL_lower_hip.STL" />
       </geometry>
     </collision>
   </link>
@@ -727,7 +726,7 @@
     name="fl_lower_hip_joint"
     type="revolute">
     <origin
-      xyz="-0.097481 0.01 -0.050966"
+      xyz="-0.103501820756454 0.0100000000000031 -0.0372474576318325"
       rpy="0 0 0" />
     <parent
       link="FL_upper_hip" />
@@ -745,17 +744,17 @@
     name="BL_upper_knee">
     <inertial>
       <origin
-        xyz="0.054328 0.0047809 -0.038621"
+        xyz="0.0505164736369487 0.00478086324288923 -0.0434873446974395"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="1.1655075615064E-05"
+        ixy="-4.65445928344213E-20"
+        ixz="1.11060328172725E-05"
+        iyy="2.74850714706816E-05"
+        iyz="4.10262877471503E-20"
+        izz="1.65085635497685E-05" />
     </inertial>
     <visual>
       <origin
@@ -763,7 +762,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BL_upper_knee.STL" />
+          filename="package://Spot1504/meshes/BL_upper_knee.STL" />
       </geometry>
       <material
         name="">
@@ -777,7 +776,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BL_upper_knee.STL" />
+          filename="package://Spot1504/meshes/BL_upper_knee.STL" />
       </geometry>
     </collision>
   </link>
@@ -785,10 +784,10 @@
     name="motor_bl_upper_knee_joint"
     type="revolute">
     <origin
-      xyz="-0.19756 0.1735 0.007712"
+      xyz="-0.196888764816585 0.173499648835901 0.00749192202401999"
       rpy="0 0 0" />
     <parent
-      link="chasiss" />
+      link="BASE" />
     <child
       link="BL_upper_knee" />
     <axis
@@ -803,17 +802,17 @@
     name="BL_lower_knee">
     <inertial>
       <origin
-        xyz="-0.065776 -0.0025629 -0.078325"
+        xyz="-0.073020175913174 -0.0025628919034543 -0.0716197354881437"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="4.04329569008616E-05"
+        ixy="1.07276544012049E-19"
+        ixz="-3.99471670446997E-05"
+        iyy="8.23233038356787E-05"
+        iyz="1.08464813554832E-19"
+        izz="4.19802164931317E-05" />
     </inertial>
     <visual>
       <origin
@@ -821,7 +820,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BL_lower_knee.STL" />
+          filename="package://Spot1504/meshes/BL_lower_knee.STL" />
       </geometry>
       <material
         name="">
@@ -835,7 +834,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BL_lower_knee.STL" />
+          filename="package://Spot1504/meshes/BL_lower_knee.STL" />
       </geometry>
     </collision>
   </link>
@@ -843,7 +842,7 @@
     name="bl_lower_knee_joint"
     type="revolute">
     <origin
-      xyz="0.086726 0.008 -0.067666"
+      xyz="0.0800840565833425 0.00799999999999989 -0.0754091763723482"
       rpy="0 0 0" />
     <parent
       link="BL_upper_knee" />
@@ -861,17 +860,17 @@
     name="BL_upper_hip">
     <inertial>
       <origin
-        xyz="-0.060388 0.0047809 -0.02822"
+        xyz="-0.0636609182774059 0.00478086324289044 -0.0197572959108056"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="4.30802547489616E-06"
+        ixy="4.80091461918602E-20"
+        ixz="-5.80568686420653E-06"
+        iyy="2.74850714706816E-05"
+        iyz="1.32078164434944E-20"
+        izz="2.38556136899364E-05" />
     </inertial>
     <visual>
       <origin
@@ -879,7 +878,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BL_upper_hip.STL" />
+          filename="package://Spot1504/meshes/BL_upper_hip.STL" />
       </geometry>
       <material
         name="">
@@ -893,7 +892,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BL_upper_hip.STL" />
+          filename="package://Spot1504/meshes/BL_upper_hip.STL" />
       </geometry>
     </collision>
   </link>
@@ -901,10 +900,10 @@
     name="motor_bl_upper_hip_joint"
     type="revolute">
     <origin
-      xyz="-0.24756 0.1735 0.007712"
+      xyz="-0.246888764816589 0.173499648835901 0.00749192202401183"
       rpy="0 0 0" />
     <parent
-      link="chasiss" />
+      link="BASE" />
     <child
       link="BL_upper_hip" />
     <axis
@@ -919,17 +918,17 @@
     name="BL_lower_hip">
     <inertial>
       <origin
-        xyz="0.07915 0.0025394 -0.12733"
+        xyz="0.0679788023958934 0.00253644265017949 -0.133413238865497"
         rpy="0 0 0" />
       <mass
-        value="0.1" />
+        value="0.2" />
       <inertia
-        ixx="0"
-        ixy="0"
-        ixz="0"
-        iyy="0"
-        iyz="0"
-        izz="0" />
+        ixx="0.000183155669628298"
+        ixy="-2.84350222375477E-08"
+        ixz="9.19755870704172E-05"
+        iyy="0.000232135119675377"
+        iyz="5.58119947260923E-08"
+        izz="4.95118760373857E-05" />
     </inertial>
     <visual>
       <origin
@@ -937,7 +936,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BL_lower_hip.STL" />
+          filename="package://Spot1504/meshes/BL_lower_hip.STL" />
       </geometry>
       <material
         name="hip">
@@ -951,7 +950,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://Spot/meshes/BL_lower_hip.STL" />
+          filename="package://Spot1504/meshes/BL_lower_hip.STL" />
       </geometry>
     </collision>
   </link>
@@ -959,7 +958,7 @@
     name="bl_lower_hip_joint"
     type="revolute">
     <origin
-      xyz="-0.097481 0.01 -0.050966"
+      xyz="-0.1035 0.01 -0.037254"
       rpy="0 0 0" />
     <parent
       link="BL_upper_hip" />

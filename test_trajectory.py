@@ -60,11 +60,11 @@ def draw(p1, p2):
 
 no_of_points = 100
 step_length = 0.1
-radius = 0
+radius = step_length / 2
 theta = 0
-y_center = -0.26329
-foot_clearance = 0.06
-x_shift = 0.0345
+y_center = -0.26
+foot_clearance = 0.05
+x_shift = 0.01
 y_shift = 0
 count = 5
 

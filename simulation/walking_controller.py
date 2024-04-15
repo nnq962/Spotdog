@@ -67,7 +67,7 @@ class WalkingController:
         self.back_right = LegData('br')
         self.gait_type = gait_type
 
-        self.MOTOROFFSETS_Spot = [np.radians(152.4), np.radians(37.96)]
+        self.MOTOROFFSETS_Spot = [np.radians(160.2), np.radians(43.28)]
 
         self.Spot_kinematics = spot_kinematic.SpotKinematics()
 
@@ -147,9 +147,9 @@ class WalkingController:
         """
         legs = self.initialize_leg_state(theta, action)
 
-        y_center = -0.26329
-        foot_clearance = 0.06
-        x_center = 0.0345
+        y_center = -0.26
+        foot_clearance = 0.05
+        x_center = 0.01
         x = y = 0
 
         # step_length = 0.1
@@ -162,7 +162,7 @@ class WalkingController:
 
         for leg in legs:
             leg_theta = (leg.theta / (2 * no_of_points)) * 2 * np.pi
-            leg.r = 0.06 / 2
+            leg.r = leg.step_length / 2
 
             if self.gait_type == "trot":
                 x = -leg.r * np.cos(leg_theta) + x_center  # + leg.x_shift
@@ -175,6 +175,7 @@ class WalkingController:
             leg.x, leg.y = x, y
 
             leg.motor_hip, leg.motor_knee, _ = self.Spot_kinematics.inverse_kinematics(leg.x, leg.y, 0)
+
             leg.motor_hip = leg.motor_hip + self.MOTOROFFSETS_Spot[0]
             leg.motor_knee = leg.motor_knee + self.MOTOROFFSETS_Spot[1]
 

@@ -330,23 +330,23 @@ if __name__ == "__main__":
     parser.add_argument('--env', help='Gym environment name', type=str, default='Spot-v4')
     parser.add_argument('--seed', help='RNG seed', type=int, default=1234123)
     parser.add_argument('--render', help='OpenGL Visualizer', type=bool, default=False)
-    parser.add_argument('--steps', help='Number of steps', type=int, default=300)
-    parser.add_argument('--policy', help='Starting policy file (npy)', type=str, default='08.04.2.npy')
+    parser.add_argument('--steps', help='Number of steps', type=int, default=600)
+    parser.add_argument('--policy', help='Starting policy file (npy)', type=str, default='init_1504.npy')
     parser.add_argument('--logdir', help='Directory root to log policy files (npy)', type=str,
                         default=str(time.strftime("%d.%m")))
     parser.add_argument('--mp', help='Enable multiprocessing', type=bool, default=True)
     parser.add_argument('--lr', help='learning rate', type=float, default=0.02)
     parser.add_argument('--noise', help='noise hyperparameter', type=float, default=0.03)
-    parser.add_argument('--episode_length', help='length of each episode', type=float, default=500)
+    parser.add_argument('--episode_length', help='length of each episode', type=float, default=400)
     parser.add_argument('--normal', help='use policy random', type=bool, default=False)
     parser.add_argument('--gait', help='type of gait you want', type=str, default='trot')
-    parser.add_argument('--msg', help='msg to save in a text file', type=str, default='')
+    parser.add_argument('--msg', help='msg to save in a text file', type=str, default='Policy init 1504')
     parser.add_argument('--stairs', help='add stairs to the bezier environment', type=bool, default=False)
     parser.add_argument('--action_dim', help='action dimension', type=int, default=12)
     parser.add_argument('--directions', help='divising factor of total directions to use', type=int, default=2)
     parser.add_argument('--curi_learn',
                         help='after how many iteration steps second stage of curriculum learning should start',
-                        type=int, default=60)
+                        type=int, default=20)
     parser.add_argument('--eval_step', help='policy evaluation after how many steps should take place', type=int,
                         default=3)
     parser.add_argument('--Domain_rand', help='add domain randomization', type=bool, default=False)
