@@ -173,8 +173,8 @@ def policy_evaluation(environment, data, hp):
         incline_deg_range = [2, 3]  # 9, 11
         incline_ori_range = [0, 2, 3]  # 0, 60, 90 degree
         fric = [0, 1]  # surface friction 0.55, 0.6
-        ms = [0, 1]  # motorstrength 0.52, 0.6
-        ef = [0]  # pertubation force 0
+        ms = [0, 1]  # motor strength 0.52, 0.6
+        ef = [0]  # perturbation force 0
         # --------------------------------------------------------------
         total_combinations = (len(incline_deg_range) * len(incline_ori_range)
                               * len(fric) * len(ms) * len(ef))
@@ -191,7 +191,7 @@ def policy_evaluation(environment, data, hp):
     else:
         # Evaluation Dataset without domain randomization
         # --------------------------------------------------------------
-        incline_deg_range = [2, 3]  # 9, 11
+        incline_deg_range = [2, 3, 4, 5]  # 9, 11, 13, 15
         incline_ori_range = [0, 2, 3]  # 0, 60, 90 degree
         # --------------------------------------------------------------
         total_combinations = len(incline_deg_range) * len(incline_ori_range)
@@ -206,6 +206,22 @@ def policy_evaluation(environment, data, hp):
     return reward_evaluation
 
 
+def create_unique_dir(base_name):
+    counter = 0
+    dir_name = base_name  # Khởi đầu với tên ban đầu
+
+    # Kiểm tra sự tồn tại của thư mục
+    while os.path.exists(dir_name):
+        counter += 1
+        dir_name = f"{base_name}.{counter}"  # Cập nhật tên với số đếm và dấu chấm
+
+    # Thư mục với tên duy nhất không tồn tại, tạo nó
+    os.mkdir(dir_name)
+    print(f"Folder '{dir_name}' created.")
+
+    return dir_name
+
+
 # Training the AI
 def train(environment, data, hp, parent_pipes, info):
     info.logdir = "experiments/" + info.logdir
@@ -215,10 +231,9 @@ def train(environment, data, hp, parent_pipes, info):
 
     working_dir = os.getcwd()
 
-    if os.path.isdir(info.logdir) is False:
-        os.mkdir(info.logdir)
+    unique_dir_name = create_unique_dir(info.logdir)
 
-    os.chdir(info.logdir)
+    os.chdir(unique_dir_name)
 
     if os.path.isdir('iterations') is False:
         os.mkdir('iterations')
@@ -237,8 +252,8 @@ def train(environment, data, hp, parent_pipes, info):
             environment.randomize_only_inclines()
         # Học tập theo chương trình
         if step > hp.curilearn:
-            avail_deg = [7, 9, 11, 11]
-            environment.incline_deg = avail_deg[random.randint(0, 3)]
+            avail_deg = [7, 9, 11, 13, 15]
+            environment.incline_deg = avail_deg[random.randint(0, 4)]
         else:
             avail_deg = [5, 7, 9]
             environment.incline_deg = avail_deg[random.randint(0, 2)]
@@ -277,10 +292,10 @@ def train(environment, data, hp, parent_pipes, info):
                     total_steps += step_count
                     temp_p += 1
                 p += process_count
-                print('Total steps till now:', total_steps)
-                print('Processes done:', p)
-                print('Step main:', step)
-                print("----------------------------------")
+                # print('Total steps till now:', total_steps)
+                # print('Processes done:', p)
+                # print('Step main:', step)
+                # print("----------------------------------")
 
         else:
             # Getting the positive rewards in the positive directions
@@ -304,6 +319,10 @@ def train(environment, data, hp, parent_pipes, info):
         sigma_r = all_rewards.std()  # Standard deviation of only rewards in the best directions is what it should be
         # Updating our policy
         data.update(rollouts, sigma_r)
+
+        print("Total steps: {}".format(total_steps))
+        print('Step main', step)
+        print("----------------------------------")
 
         # Start evaluating after only second stage
         if step >= hp.curilearn:
@@ -330,23 +349,23 @@ if __name__ == "__main__":
     parser.add_argument('--env', help='Gym environment name', type=str, default='Spot-v4')
     parser.add_argument('--seed', help='RNG seed', type=int, default=1234123)
     parser.add_argument('--render', help='OpenGL Visualizer', type=bool, default=False)
-    parser.add_argument('--steps', help='Number of steps', type=int, default=600)
-    parser.add_argument('--policy', help='Starting policy file (npy)', type=str, default='init_1504.npy')
+    parser.add_argument('--steps', help='Number of steps', type=int, default=200)
+    parser.add_argument('--policy', help='Starting policy file (npy)', type=str, default='train_from1104.npy')
     parser.add_argument('--logdir', help='Directory root to log policy files (npy)', type=str,
                         default=str(time.strftime("%d.%m")))
     parser.add_argument('--mp', help='Enable multiprocessing', type=bool, default=True)
     parser.add_argument('--lr', help='learning rate', type=float, default=0.02)
     parser.add_argument('--noise', help='noise hyperparameter', type=float, default=0.03)
-    parser.add_argument('--episode_length', help='length of each episode', type=float, default=400)
+    parser.add_argument('--episode_length', help='length of each episode', type=float, default=600)
     parser.add_argument('--normal', help='use policy random', type=bool, default=False)
     parser.add_argument('--gait', help='type of gait you want', type=str, default='trot')
-    parser.add_argument('--msg', help='msg to save in a text file', type=str, default='Policy init 1504')
+    parser.add_argument('--msg', help='msg to save in a text file', type=str, default='Training with train_from1104')
     parser.add_argument('--stairs', help='add stairs to the bezier environment', type=bool, default=False)
     parser.add_argument('--action_dim', help='action dimension', type=int, default=12)
     parser.add_argument('--directions', help='divising factor of total directions to use', type=int, default=2)
     parser.add_argument('--curi_learn',
                         help='after how many iteration steps second stage of curriculum learning should start',
-                        type=int, default=20)
+                        type=int, default=60)
     parser.add_argument('--eval_step', help='policy evaluation after how many steps should take place', type=int,
                         default=3)
     parser.add_argument('--Domain_rand', help='add domain randomization', type=bool, default=False)
@@ -389,7 +408,7 @@ if __name__ == "__main__":
     hyper_parameters.learning_rate = args.lr
     hyper_parameters.noise = args.noise
     hyper_parameters.episode_length = args.episode_length
-    hyper_parameters.nb_directions = int(env.observation_space.sample().shape[0] * env.action_space.sample().shape[0])
+    hyper_parameters.nb_directions = 200
     hyper_parameters.nb_best_directions = int(hyper_parameters.nb_directions / args.directions)
     hyper_parameters.normal = args.normal
     hyper_parameters.gait = args.gait
@@ -399,7 +418,6 @@ if __name__ == "__main__":
     hyper_parameters.evalstep = args.eval_step
     hyper_parameters.domain_Rand = args.Domain_rand
     hyper_parameters.anti_clock_ori = args.anti_clock_ori
-    print("Log dir", args.logdir)
     hyper_parameters.logdir = args.logdir
     np.random.seed(hyper_parameters.seed)
     max_processes = 15

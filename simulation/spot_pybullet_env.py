@@ -171,6 +171,7 @@ class SpotEnv(gym.Env):
         self.hard_reset()
 
         self.set_randomization(default=True, idx1=2, idx2=2)
+        self.height = []
 
         if self._is_stairs:
             boxhalflength = 0.1
@@ -384,7 +385,7 @@ class SpotEnv(gym.Env):
         :return:
         """
         if default:
-            friction = [0.55, 0.6, 0.8]
+            friction = [0.55, 1.6, 0.8]
             clip = [5.2, 6, 7, 8]
             pertub_range = [0, -60, 60, -100, 100]
             self.perturb_steps = 150
@@ -625,24 +626,26 @@ class SpotEnv(gym.Env):
         1. phần thưởng đạt được
         2. trả về True nếu môi trường kết thúc
         """
-        print("wedge angle: ", self.incline_deg)
         wedge_angle = np.radians(self.incline_deg)
-        robot_height_from_support_plane = 0.2555
+        robot_height_from_support_plane = 0.25447
         pos, ori = self.get_base_pos_and_orientation()
 
         rpy_original = self._pybullet_client.getEulerFromQuaternion(ori)
         rpy = np.round(rpy_original, 4)
 
+        # self.height.append(pos[2])
+        # print(self.height)
+
         current_height = round(pos[2], 5)
         self.current_com_height = current_height
-        standing_penalty = 3
+        standing_penalty = 10
 
         desired_height = (robot_height_from_support_plane / np.cos(wedge_angle) + np.tan(wedge_angle)
                           * (pos[0] * np.cos(self.incline_ori) + 0.5))
 
-        roll_reward = np.exp(-45 * ((rpy[0] - self.support_plane_estimated_roll) ** 2))
-        pitch_reward = np.exp(-45 * ((rpy[1] - self.support_plane_estimated_pitch) ** 2))
-        yaw_reward = np.exp(-400 * (rpy[2] ** 2))
+        roll_reward = np.exp(-300 * ((rpy[0] - self.support_plane_estimated_roll) ** 2))
+        pitch_reward = np.exp(-300 * ((rpy[1] - self.support_plane_estimated_pitch) ** 2))
+        yaw_reward = np.exp(-800 * (rpy[2] ** 2))
         height_reward = np.exp(-800 * (desired_height - current_height) ** 2)
 
         x = pos[0]
@@ -662,9 +665,8 @@ class SpotEnv(gym.Env):
         self.step_disp.append(step_distance_x)
 
         if self._n_steps > 150:
-            if sum(self.step_disp) < 0.035:
+            if sum(self.step_disp) < 0.05:
                 reward = reward - standing_penalty
-
         return reward, done
 
     def _apply_pd_control(self, motor_commands, motor_vel_commands):

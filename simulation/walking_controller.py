@@ -71,6 +71,11 @@ class WalkingController:
 
         self.Spot_kinematics = spot_kinematic.SpotKinematics()
 
+        self.step_length_1 = []
+        self.step_length_2 = []
+        self.step_length_3 = []
+        self.step_length_4 = []
+
     def update_leg_theta(self, theta):
         """
         Tùy thuộc vào dáng đi, theta cho mỗi chân sẽ được tính toán
@@ -148,7 +153,7 @@ class WalkingController:
         legs = self.initialize_leg_state(theta, action)
 
         y_center = -0.26
-        foot_clearance = 0.05
+        foot_clearance = 0.06
         x_center = 0.01
         x = y = 0
 
@@ -160,7 +165,20 @@ class WalkingController:
         # x_shift = 0.0345
         # y_shift = 0
 
+        count = 0
+
         for leg in legs:
+
+            count += 1
+            if count == 1:
+                self.step_length_1.append(leg.step_length)
+            if count == 2:
+                self.step_length_2.append(leg.step_length)
+            if count == 3:
+                self.step_length_3.append(leg.step_length)
+            if count == 4:
+                self.step_length_4.append(leg.step_length)
+
             leg_theta = (leg.theta / (2 * no_of_points)) * 2 * np.pi
             leg.r = leg.step_length / 2
 
@@ -197,5 +215,11 @@ class WalkingController:
                             legs.front_right.motor_knee,
                             legs.back_left.motor_hip, legs.back_left.motor_knee, legs.back_right.motor_hip,
                             legs.back_right.motor_knee]
+
+        # print(self.step_length_1)
+        # print(self.step_length_2)
+        # print(self.step_length_3)
+        # print(self.step_length_4)
+        # print("-------------------------------")
 
         return leg_motor_angles
