@@ -627,7 +627,7 @@ class SpotEnv(gym.Env):
         2. trả về True nếu môi trường kết thúc
         """
         wedge_angle = np.radians(self.incline_deg)
-        robot_height_from_support_plane = 0.25447
+        robot_height_from_support_plane = 0.26
         pos, ori = self.get_base_pos_and_orientation()
 
         rpy_original = self._pybullet_client.getEulerFromQuaternion(ori)
