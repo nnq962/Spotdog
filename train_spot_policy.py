@@ -320,8 +320,8 @@ def train(environment, data, hp, parent_pipes, info):
         # Updating our policy
         data.update(rollouts, sigma_r)
 
-        print("Total steps: , total_steps)
-        print('Step main: ', step)
+        print("Total steps:", total_steps)
+        print('Step main:', step)
         print("----------------------------------")
 
         # Start evaluating after only second stage
