@@ -4,24 +4,26 @@ import argparse
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 
-tuned_actions_spot = np.array([[0.5, 0.5, 0.5, 0.5,
+tuned_actions_spot = np.array([[0.25, 0.25, 0.25, 0.25,
+                                0.25, 0.25, 0.25, 0.25,
                                 0, 0, 0, 0,
                                 0, 0, 0, 0],
 
-                               [0.5, 0.5, 0.5, 0.5,
+                               [0.25, 0.25, 0.25, 0.25,
+                                0.25, 0.25, 0.25, 0.25,
                                 0, 0, 0, 0,
                                 0, 0, 0, 0],
 
-                               [0.5, 0.5, 0.5, 0.5,
+                               [0.25, 0.25, 0.25, 0.25,
+                                0.25, 0.25, 0.25, 0.25,
                                 0, 0, 0, 0,
-                                0, 0, 0, 0]
-                               ])
+                                0, 0, 0, 0]])
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--robotName', help='the robot to be trained for', type=str, default='Spot')
-    parser.add_argument('--policyName', help='file name of the initial policy', type=str, default='init_1504')
+    parser.add_argument('--policyName', help='file name of the initial policy', type=str, default='init_data_07_07')
     args = parser.parse_args()
 
     if args.policyName == 'IP_':
@@ -36,7 +38,7 @@ if __name__ == "__main__":
 
     if args.robotName == 'Spot':
         idx1 = [3]
-        idx2 = [0, 3, 2]
+        idx2 = [0]
         idx3 = [1]
         experiment_counter = 0
         env = spot.SpotEnv(render=True, wedge=True, stairs=False, on_rack=False, gait='trot')

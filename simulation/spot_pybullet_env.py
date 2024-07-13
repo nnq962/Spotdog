@@ -2,7 +2,6 @@ import gym
 from gym import spaces
 import numpy as np
 from simulation import walking_controller
-from simulation import test_walking
 import random
 from collections import deque
 import pybullet
@@ -43,7 +42,8 @@ class SpotEnv(gym.Env):
                  wedge=True,
                  imu_noise=False,
                  deg=5,
-                 test=False):
+                 test=False,
+                 default_pos=(-0.23, 0, 0.3)):
         """
         Class for Spotdog
         :param render: render the pybullet environment
@@ -112,15 +112,14 @@ class SpotEnv(gym.Env):
         self.wedge_start = 0.5
         self.wedge_halflength = 2
 
+        self.test = test
         if gait is 'trot':
             phase = [0, no_of_points, no_of_points, 0]
         elif gait is 'walk':
             phase = [0, no_of_points, 3 * no_of_points / 2, no_of_points / 2]
 
         self._walkcon = walking_controller.WalkingController(gait_type=gait, phase=phase)
-        self.test_walking = test_walking.TestWalking(gait_type=gait, phase=phase)
 
-        self.test = test
         self.inverse = False
         self._cam_dist = 1.0
         self._cam_yaw = 0.0
@@ -152,8 +151,9 @@ class SpotEnv(gym.Env):
 
         self.add_imu_noise = imu_noise
 
-        self.INIT_POSITION = [0, 0, 0.35]
+        self.INIT_POSITION = default_pos
         self.INIT_ORIENTATION = [0, 0, 0, 1]
+        self.desired_height = 0
 
         self.support_plane_estimated_pitch = 0
         self.support_plane_estimated_roll = 0
@@ -240,7 +240,7 @@ class SpotEnv(gym.Env):
 
             self.set_wedge_friction(0.7)
 
-        model_path = "simulation/Spot1504/urdf/Spot1504.urdf"
+        model_path = "simulation/SpotDog2305/urdf/SpotDog2305.urdf"
         self.spot = self._pybullet_client.loadURDF(model_path, self.INIT_POSITION, self.INIT_ORIENTATION)
 
         self._joint_name_to_id, self._motor_id_list = self.build_motor_id_list()
@@ -385,7 +385,7 @@ class SpotEnv(gym.Env):
         :return:
         """
         if default:
-            friction = [0.55, 1.6, 0.8]
+            friction = [0.55, 0.6, 0.8]
             clip = [5.2, 6, 7, 8]
             pertub_range = [0, -60, 60, -100, 100]
             self.perturb_steps = 150
@@ -455,9 +455,9 @@ class SpotEnv(gym.Env):
     def transform_action(action):
         """
         Chuyển đổi các hành động được chuẩn hóa thành các lệnh đã được tỷ lệ
-        :param action: 20 dimensional 1D array of predicted action values from policy in following order :
-            [(step lengths of FR, FL, BR, BL), (steer angles of FR, FL, BR, BL),
-            (Y-shifts of FR, FL, BR, BL), (X-shifts of FR, FL, BR, BL), (Z-shifts of FR, FL, BR, BL)]
+        :param action: 16 dimensional 1D array of predicted action values from policy in following order :
+            [(step lengths of FR, FL, BR, BL), (step height of FR, FL, BR, BL),
+            (X-shifts of FR, FL, BR, BL), (Y-shifts of FR, FL, BR, BL)]
         :return: các tham số hành động đã được tỷ lệ
 
         :note:
@@ -470,11 +470,15 @@ class SpotEnv(gym.Env):
 
         action[:4] = (action[:4] + 1) / 2  # Step lengths are positive always
 
-        action[:4] = action[:4] * 2 * 0.075  # Max step length = 2x0.068
+        action[:4] = action[:4] * 0.16  # Max step length = 0.16
 
-        action[4:8] = np.clip(action[4:8], -0.01, 0.03)  # x_shift
+        action[4:8] = (action[4:8] + 1) / 2  # Step height are positive always
 
-        action[8:12] = action[8:12] * 0.05  # max y_shift = 0.045
+        action[4:8] = action[4:8] * 0.08  # Max step height = 0.08
+
+        action[8:12] = np.clip(action[8:12], -0.035, 0.035)  # x_shift
+
+        action[12:16] = np.clip(action[12:16], -0.015, 0.015)  # y_shift
 
         return action
 
@@ -520,7 +524,9 @@ class SpotEnv(gym.Env):
         3. liệu bước có kết thúc môi trường hay không
         4. bất kỳ thông tin nào về môi trường (sẽ được thêm sau)
         """
-        action = self.transform_action(action)
+
+        if self.test is False:
+            action = self.transform_action(action)
         self.do_simulation(action, n_frames=self._frame_skip)
         ob = self.get_observation()
         reward, done = self._get_reward()
@@ -548,10 +554,10 @@ class SpotEnv(gym.Env):
         """
         omega = 2 * no_of_points * self._frequency
 
-        if self.test is False:
-            leg_m_angle_cmd = self._walkcon.run_elliptical_traj_spot(self._theta, action)
+        if self.test is True:
+            leg_m_angle_cmd = self._walkcon.run_elliptical(self._theta, self.test)
         else:
-            leg_m_angle_cmd = self.test_walking.run_elliptical_traj_spot(self._theta)
+            leg_m_angle_cmd = self._walkcon.run_elliptical_traj_spot(self._theta, action)
 
         self._theta = constrain_theta(omega * self.dt + self._theta)
 
@@ -643,10 +649,14 @@ class SpotEnv(gym.Env):
         desired_height = (robot_height_from_support_plane / np.cos(wedge_angle) + np.tan(wedge_angle)
                           * (pos[0] * np.cos(self.incline_ori) + 0.5))
 
-        roll_reward = np.exp(-300 * ((rpy[0] - self.support_plane_estimated_roll) ** 2))
-        pitch_reward = np.exp(-300 * ((rpy[1] - self.support_plane_estimated_pitch) ** 2))
-        yaw_reward = np.exp(-800 * (rpy[2] ** 2))
-        height_reward = np.exp(-800 * (desired_height - current_height) ** 2)
+        # roll_reward = np.exp(-600 * ((rpy[0] - self.support_plane_estimated_roll) ** 2))
+        # pitch_reward = np.exp(-600 * ((rpy[1] - self.support_plane_estimated_pitch) ** 2))
+        # yaw_reward = np.exp(-800 * (rpy[2] ** 2))
+        # height_reward = np.exp(-800 * (desired_height - current_height) ** 2)
+
+        roll_reward = np.abs(rpy[0] - self.support_plane_estimated_roll)
+        pitch_reward = np.abs(rpy[1] - self.support_plane_estimated_pitch)
+        yaw_reward = np.abs(rpy[2])
 
         x = pos[0]
         x_last = self._last_base_position[0]
@@ -658,15 +668,20 @@ class SpotEnv(gym.Env):
         if done:
             reward = 0
         else:
-            reward = round(yaw_reward, 4) + round(pitch_reward, 4) + round(roll_reward, 4) \
-                     + round(height_reward, 4) + 100 * round(step_distance_x, 4)
+            # reward = round(yaw_reward, 4) + round(pitch_reward, 4) + round(roll_reward, 4) \
+            #          + round(height_reward, 4) + 100 * round(step_distance_x, 4)
+
+            reward_distance = 10 * step_distance_x
+            penalty = roll_reward + pitch_reward + 2 * yaw_reward
+            reward = reward_distance - penalty
 
         # Penalize for standing at same position for continuous 150 steps
-        self.step_disp.append(step_distance_x)
+        # self.step_disp.append(step_distance_x)
+        #
+        # if self._n_steps > 150:
+        #     if sum(self.step_disp) < 0.05:
+        #         reward = reward - standing_penalty
 
-        if self._n_steps > 150:
-            if sum(self.step_disp) < 0.05:
-                reward = reward - standing_penalty
         return reward, done
 
     def _apply_pd_control(self, motor_commands, motor_vel_commands):

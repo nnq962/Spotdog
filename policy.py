@@ -1,6 +1,5 @@
 import numpy as np
 
-path = "initial_policies/IP_Spot.npy"
+pi = 3.141592653589793
 
-data = np.load(path)
-print(data)
+print(np.round(pi, 3))

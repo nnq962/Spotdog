@@ -1,0 +1,975 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="SpotDog2305">
+  <link
+    name="BASE">
+    <inertial>
+      <origin
+        xyz="0.0013806 5.5581E-06 0.013874"
+        rpy="0 0 0" />
+      <mass
+        value="5" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BASE.STL" />
+      </geometry>
+      <material
+        name="BASE">
+        <color
+          rgba="0.5 0.5 0.5 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BASE.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="FR_upper_knee">
+    <inertial>
+      <origin
+        xyz="0.050518 -0.0047809 -0.043485"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FR_upper_knee.STL" />
+      </geometry>
+      <material
+        name="knee">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FR_upper_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_fr_upper_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.24911 -0.1735 0.0074919"
+      rpy="0 0 0" />
+    <parent
+      link="BASE" />
+    <child
+      link="FR_upper_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FR_lower_knee">
+    <inertial>
+      <origin
+        xyz="-0.073022 0.0025629 -0.071618"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FR_lower_knee.STL" />
+      </geometry>
+      <material
+        name="knee">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FR_lower_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fr_lower_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.080087 -0.008 -0.075406"
+      rpy="0 0 0" />
+    <parent
+      link="FR_upper_knee" />
+    <child
+      link="FR_lower_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FR_upper_hip">
+    <inertial>
+      <origin
+        xyz="-0.063662 -0.0047809 -0.019753"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FR_upper_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FR_upper_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_fr_upper_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.19911 -0.1735 0.0074919"
+      rpy="0 0 0" />
+    <parent
+      link="BASE" />
+    <child
+      link="FR_upper_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FR_lower_hip">
+    <inertial>
+      <origin
+        xyz="0.068122 -0.0024607 -0.13369"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FR_lower_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FR_lower_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fr_lower_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.1035 -0.01 -0.037247"
+      rpy="0 0 0" />
+    <parent
+      link="FR_upper_hip" />
+    <child
+      link="FR_lower_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BR_upper_knee">
+    <inertial>
+      <origin
+        xyz="0.050516 -0.0047809 -0.043487"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BR_upper_knee.STL" />
+      </geometry>
+      <material
+        name="knee">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BR_upper_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_br_upper_knee_joint"
+    type="revolute">
+    <origin
+      xyz="-0.19689 -0.1735 0.0074919"
+      rpy="0 0 0" />
+    <parent
+      link="BASE" />
+    <child
+      link="BR_upper_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BR_lower_knee">
+    <inertial>
+      <origin
+        xyz="-0.07302 0.0025629 -0.07162"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BR_lower_knee.STL" />
+      </geometry>
+      <material
+        name="knee">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BR_lower_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="br_lower_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.080084 -0.008 -0.075409"
+      rpy="0 0 0" />
+    <parent
+      link="BR_upper_knee" />
+    <child
+      link="BR_lower_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BR_upper_hip">
+    <inertial>
+      <origin
+        xyz="-0.063661 -0.0047809 -0.019757"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BR_upper_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BR_upper_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_br_upper_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.246888764816864 -0.173500351164099 0.00749192202338655"
+      rpy="0 0 0" />
+    <parent
+      link="BASE" />
+    <child
+      link="BR_upper_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BR_lower_hip">
+    <inertial>
+      <origin
+        xyz="0.06812 -0.0024607 -0.13369"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BR_lower_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BR_lower_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="br_lower_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.103499423252635 -0.0100000000000007 -0.0372541190514647"
+      rpy="0 0 0" />
+    <parent
+      link="BR_upper_hip" />
+    <child
+      link="BR_lower_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FL_upper_knee">
+    <inertial>
+      <origin
+        xyz="0.050518 0.0047809 -0.043485"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FL_upper_knee.STL" />
+      </geometry>
+      <material
+        name="knee">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FL_upper_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_fl_upper_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.249111235183415 0.173499648835901 0.0074919220240201"
+      rpy="0 0 0" />
+    <parent
+      link="BASE" />
+    <child
+      link="FL_upper_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FL_lower_knee">
+    <inertial>
+      <origin
+        xyz="-0.073022 -0.0025629 -0.071618"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FL_lower_knee.STL" />
+      </geometry>
+      <material
+        name="knee">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FL_lower_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fl_lower_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.0800874913210537 0.00799999999999891 -0.0754055285368097"
+      rpy="0 0 0" />
+    <parent
+      link="FL_upper_knee" />
+    <child
+      link="FL_lower_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FL_upper_hip">
+    <inertial>
+      <origin
+        xyz="-0.063662 0.0047809 -0.019753"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FL_upper_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FL_upper_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_fl_upper_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0.199111235183205 0.173499648835901 0.00749192202384069"
+      rpy="0 0 0" />
+    <parent
+      link="BASE" />
+    <child
+      link="FL_upper_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="FL_lower_hip">
+    <inertial>
+      <origin
+        xyz="0.06798 0.0025364 -0.13341"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FL_lower_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/FL_lower_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="fl_lower_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.103501820756454 0.0100000000000031 -0.0372474576318325"
+      rpy="0 0 0" />
+    <parent
+      link="FL_upper_hip" />
+    <child
+      link="FL_lower_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BL_upper_knee">
+    <inertial>
+      <origin
+        xyz="0.050516 0.0047809 -0.043487"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BL_upper_knee.STL" />
+      </geometry>
+      <material
+        name="knee">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BL_upper_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_bl_upper_knee_joint"
+    type="revolute">
+    <origin
+      xyz="-0.196888764816585 0.173499648835901 0.00749192202401999"
+      rpy="0 0 0" />
+    <parent
+      link="BASE" />
+    <child
+      link="BL_upper_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BL_lower_knee">
+    <inertial>
+      <origin
+        xyz="-0.07302 -0.0025629 -0.07162"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BL_lower_knee.STL" />
+      </geometry>
+      <material
+        name="knee">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BL_lower_knee.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="bl_lower_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.080084 0.008 -0.075409"
+      rpy="0 0 0" />
+    <parent
+      link="BL_upper_knee" />
+    <child
+      link="BL_lower_knee" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BL_upper_hip">
+    <inertial>
+      <origin
+        xyz="-0.063661 0.0047809 -0.019757"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BL_upper_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BL_upper_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="motor_bl_upper_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.24689 0.1735 0.0074919"
+      rpy="0 0 0" />
+    <parent
+      link="BASE" />
+    <child
+      link="BL_upper_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+  <link
+    name="BL_lower_hip">
+    <inertial>
+      <origin
+        xyz="0.067979 0.0025364 -0.13341"
+        rpy="0 0 0" />
+      <mass
+        value="0.2" />
+      <inertia
+        ixx="0"
+        ixy="0"
+        ixz="0"
+        iyy="0"
+        iyz="0"
+        izz="0" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BL_lower_hip.STL" />
+      </geometry>
+      <material
+        name="hip">
+        <color
+          rgba="0.878431373  0.878431373 0.878431373 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://SpotDog2305/meshes/BL_lower_hip.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="bl_lower_hip_joint"
+    type="revolute">
+    <origin
+      xyz="-0.1035 0.01 -0.037254"
+      rpy="0 0 0" />
+    <parent
+      link="BL_upper_hip" />
+    <child
+      link="BL_lower_hip" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="20"
+      velocity="100" />
+  </joint>
+</robot>

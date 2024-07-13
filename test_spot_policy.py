@@ -6,21 +6,21 @@ import numpy as np
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('--PolicyDir', help='directory of the policy to be tested', type=str, default='19.04.1')
+    parser.add_argument('--PolicyDir', help='directory of the policy to be tested', type=str, default='12_07')
     parser.add_argument('--FrictionCoeff', help='foot friction value to be set', type=float, default=1.6)
-    parser.add_argument('--WedgeIncline', help='wedge incline degree of the wedge', type=int, default=15)
+    parser.add_argument('--WedgeIncline', help='wedge incline degree of the wedge', type=int, default=11)
     parser.add_argument('--WedgeOrientation', help='wedge orientation degree of the wedge', type=float, default=0)
     parser.add_argument('--MotorStrength', help='maximum motor Strength to be applied', type=float, default=7.0)
     parser.add_argument('--RandomTest', help='flag to sample test values randomly ', type=bool, default=False)
     parser.add_argument('--seed', help='seed for the random sampling', type=float, default=100)
-    parser.add_argument('--EpisodeLength', help='number of gait steps of a episode', type=int, default=7000)
+    parser.add_argument('--EpisodeLength', help='number of gait steps of a episode', type=int, default=700)
     parser.add_argument('--PerturbForce',
                         help='perturbation force to applied perpendicular to the heading direction of the robot',
                         type=float, default=0.0)
     parser.add_argument('--Downhill', help='should robot walk downhill?', type=bool, default=False)
     parser.add_argument('--Stairs', help='test on staircase', type=bool, default=False)
     parser.add_argument('--AddImuNoise', help='flag to add noise in IMU readings', type=bool, default=False)
-    parser.add_argument('--Test', help='flag to test with out data', type=bool, default=False)
+    parser.add_argument('--Test', help='Test without data', type=bool, default=False)
 
     args = parser.parse_args()
     policy = np.load("experiments/" + args.PolicyDir + "/iterations/best_policy.npy")
@@ -41,7 +41,8 @@ if __name__ == '__main__':
                        on_rack=False,
                        gait='trot',
                        imu_noise=args.AddImuNoise,
-                       test=args.Test)
+                       test=args.Test,
+                       default_pos=(-0.23, 0, 0.3))
 
     if args.RandomTest:
         env.set_randomization(default=False)
@@ -62,7 +63,8 @@ if __name__ == '__main__':
         green('\nWedge Inclination:'), red(env.incline_deg),
         green('\nWedge Orientation:'), red(np.degrees(env.incline_ori)),
         green('\nCoeff. of friction:'), red(env.friction),
-        green('\nMotor saturation torque:'), red(env.clips))
+        green('\nMotor saturation torque:'), red(env.clips)
+    )
 
     # Simulation starts
     t_r = 0
@@ -77,6 +79,6 @@ if __name__ == '__main__':
         #     yaw_cam = 0
 
         # if i_step % 100 == 0:
-        # env.pybullet_client.resetDebugVisualizerCamera(1, 50, -10, env.get_base_pos_and_orientation()[0])
+        # env.pybullet_client.resetDebugVisualizerCamera(0.95, 90, -80, env.get_base_pos_and_orientation()[0])
 
-    print("Total_reward " + str(t_r))
+    print("Total reward: " + str(t_r) + ' -> ' + str(args.PolicyDir))

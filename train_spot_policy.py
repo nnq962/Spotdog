@@ -191,8 +191,10 @@ def policy_evaluation(environment, data, hp):
     else:
         # Evaluation Dataset without domain randomization
         # --------------------------------------------------------------
-        incline_deg_range = [2, 3, 4, 5]  # 9, 11, 13, 15
-        incline_ori_range = [0, 2, 3]  # 0, 60, 90 degree
+        # incline_deg_range = [2, 3, 4, 5]  # 9, 11, 13, 15
+        # incline_ori_range = [0, 2, 3]  # 0, 60, 90 degree
+        incline_deg_range = [2, 3]  # 9, 11
+        incline_ori_range = [0]
         # --------------------------------------------------------------
         total_combinations = len(incline_deg_range) * len(incline_ori_range)
 
@@ -213,7 +215,7 @@ def create_unique_dir(base_name):
     # Kiểm tra sự tồn tại của thư mục
     while os.path.exists(dir_name):
         counter += 1
-        dir_name = f"{base_name}.{counter}"  # Cập nhật tên với số đếm và dấu chấm
+        dir_name = f"{base_name}_{counter}"  # Cập nhật tên với số đếm và dấu chấm
 
     # Thư mục với tên duy nhất không tồn tại, tạo nó
     os.mkdir(dir_name)
@@ -252,8 +254,8 @@ def train(environment, data, hp, parent_pipes, info):
             environment.randomize_only_inclines()
         # Học tập theo chương trình
         if step > hp.curilearn:
-            avail_deg = [7, 9, 11, 13, 15]
-            environment.incline_deg = avail_deg[random.randint(0, 4)]
+            avail_deg = [7, 9, 11]
+            environment.incline_deg = avail_deg[random.randint(0, 2)]
         else:
             avail_deg = [5, 7, 9]
             environment.incline_deg = avail_deg[random.randint(0, 2)]
@@ -320,8 +322,9 @@ def train(environment, data, hp, parent_pipes, info):
         # Updating our policy
         data.update(rollouts, sigma_r)
 
-        print("Total steps:", total_steps)
-        print('Step main:', step)
+        # print("Total steps:", total_steps)
+        print('Step:', step)
+        # print('Best return:', best_return)
         print("----------------------------------")
 
         # Start evaluating after only second stage
@@ -350,24 +353,24 @@ if __name__ == "__main__":
     parser.add_argument('--seed', help='RNG seed', type=int, default=1234123)
     parser.add_argument('--render', help='OpenGL Visualizer', type=bool, default=False)
     parser.add_argument('--steps', help='Number of steps', type=int, default=200)
-    parser.add_argument('--policy', help='Starting policy file (npy)', type=str, default='train_from1104.npy')
+    parser.add_argument('--policy', help='Starting policy file (npy)', type=str, default='init_data_07_07.npy')
     parser.add_argument('--logdir', help='Directory root to log policy files (npy)', type=str,
-                        default=str(time.strftime("%d.%m")))
+                        default=str(time.strftime("%d_%m")))
     parser.add_argument('--mp', help='Enable multiprocessing', type=bool, default=True)
-    parser.add_argument('--lr', help='learning rate', type=float, default=0.02)
-    parser.add_argument('--noise', help='noise hyperparameter', type=float, default=0.03)
-    parser.add_argument('--episode_length', help='length of each episode', type=float, default=600)
+    parser.add_argument('--lr', help='learning rate', type=float, default=0.03)
+    parser.add_argument('--noise', help='noise hyperparameter', type=float, default=0.02)
+    parser.add_argument('--episode_length', help='length of each episode', type=float, default=700)
     parser.add_argument('--normal', help='use policy random', type=bool, default=False)
     parser.add_argument('--gait', help='type of gait you want', type=str, default='trot')
-    parser.add_argument('--msg', help='msg to save in a text file', type=str, default='Training with train_from1104')
+    parser.add_argument('--msg', help='msg to save in a text file', type=str, default='Update reward function 12/07')
     parser.add_argument('--stairs', help='add stairs to the bezier environment', type=bool, default=False)
-    parser.add_argument('--action_dim', help='action dimension', type=int, default=12)
-    parser.add_argument('--directions', help='divising factor of total directions to use', type=int, default=2)
+    parser.add_argument('--action_dim', help='action dimension', type=int, default=16)
+    parser.add_argument('--directions', help='divising factor of total directions to use', type=int, default=3)
     parser.add_argument('--curi_learn',
                         help='after how many iteration steps second stage of curriculum learning should start',
-                        type=int, default=60)
+                        type=int, default=40)
     parser.add_argument('--eval_step', help='policy evaluation after how many steps should take place', type=int,
-                        default=3)
+                        default=1)
     parser.add_argument('--Domain_rand', help='add domain randomization', type=bool, default=False)
     parser.add_argument('--anti_clock_ori', help='rotate the inclines anti-clockwise', type=bool, default=True)
 

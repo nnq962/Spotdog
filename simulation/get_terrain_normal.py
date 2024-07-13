@@ -156,7 +156,7 @@ def four_point_contact_check_stoch2(legs, contact_info, rot_mat):
         euler_angles_of_support_plane[1] : the estimated pitch of the support plane
     """
     vaild = False
-    motor_offsets = [np.radians(152.4), np.radians(20)]
+    motor_offsets = [np.radians(160.2), np.radians(43.28)]
     leg_contact_info = np.zeros(4)
     for i in range(4):
         if contact_info[i] == 1 or contact_info[i + 4] == 1:
