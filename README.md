@@ -1,3 +1,3 @@
 # Spotdog
 project made by NNQ
-commit test set SSH
+Japan_data without step heights
