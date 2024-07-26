@@ -1,0 +1,11 @@
+Learning rate: 0.02
+Noise: 0.02
+Env name: Spot-v4
+Episode length: 500
+Direction ratio: 3.0303030303030303
+Normal initialization: False
+Gait: trot
+Incline Orientaion Anti-Clockwise: True
+Domain randomization: False
+Curriculmn introduced at iteration: 40
+Training with zeros matrix, old reward function

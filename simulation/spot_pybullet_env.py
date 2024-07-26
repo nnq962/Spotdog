@@ -8,6 +8,9 @@ import pybullet
 from simulation import bullet_client
 import pybullet_data
 from simulation import get_terrain_normal as normal_estimator
+import time
+# Bắt đầu đo thời gian
+start_time = time.time()
 
 leg_position = ["fl_", "bl_", "fr_", "br_"]
 knee_constraint_point_hip = [0.0263, 0, -0.0423]  # hip
@@ -190,6 +193,14 @@ class SpotEnv(gym.Env):
                                                              baseOrientation=[0.0, 0.0, 0.0, 1])
                 self.stairs.append(step)
                 self._pybullet_client.changeDynamics(step, -1, lateralFriction=0.8)
+
+        # ----------------------------------
+        self.count = 0
+        self.data1 = []
+        self.data2 = []
+        self.data3 = []
+        self.data4 = []
+        # ----------------------------------
 
     def hard_reset(self):
         """
@@ -385,7 +396,7 @@ class SpotEnv(gym.Env):
         :return:
         """
         if default:
-            friction = [0.55, 0.6, 0.8]
+            friction = [0.55, 1.6, 0.8]
             clip = [5.2, 6, 7, 8]
             pertub_range = [0, -60, 60, -100, 100]
             self.perturb_steps = 150
@@ -451,8 +462,7 @@ class SpotEnv(gym.Env):
         yx = np.concatenate([y, x])
         return yx
 
-    @staticmethod
-    def transform_action(action):
+    def transform_action(self, action):
         """
         Chuyển đổi các hành động được chuẩn hóa thành các lệnh đã được tỷ lệ
         :param action: 16 dimensional 1D array of predicted action values from policy in following order :
@@ -472,13 +482,32 @@ class SpotEnv(gym.Env):
 
         action[:4] = action[:4] * 0.16  # Max step length = 0.16
 
-        action[4:8] = (action[4:8] + 1) / 2  # Step height are positive always
+        action[4:8] = np.clip(action[4:8], -0.035, 0.035)  # x_shift
 
-        action[4:8] = action[4:8] * 0.08  # Max step height = 0.08
+        action[8:12] = np.clip(action[8:12], -0.015, 0.015)  # y_shift
 
-        action[8:12] = np.clip(action[8:12], -0.035, 0.035)  # x_shift
+        # ----------------------------------
+        # elapsed_time = time.time() - start_time
+        if self.count < 500:
+            self.data1.append(action[8])
+            self.data2.append(action[9])
+            self.data3.append(action[10])
+            self.data4.append(action[11])
+            # self.data2.append(self.support_plane_estimated_roll)
+        # print(self.count)
+        self.count += 1
+        if self.count > 500:
+            print("Data 1: ")
+            print(self.data1)
+            print("Data 2: ")
+            print(self.data2)
+            print("Data 3: ")
+            print(self.data3)
+            print("Data 4: ")
+            print(self.data4)
+            print("-----------------")
 
-        action[12:16] = np.clip(action[12:16], -0.015, 0.015)  # y_shift
+        # ----------------------------------
 
         return action
 
@@ -649,14 +678,14 @@ class SpotEnv(gym.Env):
         desired_height = (robot_height_from_support_plane / np.cos(wedge_angle) + np.tan(wedge_angle)
                           * (pos[0] * np.cos(self.incline_ori) + 0.5))
 
-        # roll_reward = np.exp(-600 * ((rpy[0] - self.support_plane_estimated_roll) ** 2))
-        # pitch_reward = np.exp(-600 * ((rpy[1] - self.support_plane_estimated_pitch) ** 2))
-        # yaw_reward = np.exp(-800 * (rpy[2] ** 2))
-        # height_reward = np.exp(-800 * (desired_height - current_height) ** 2)
+        roll_reward = np.exp(-600 * ((rpy[0] - self.support_plane_estimated_roll) ** 2))
+        pitch_reward = np.exp(-600 * ((rpy[1] - self.support_plane_estimated_pitch) ** 2))
+        yaw_reward = np.exp(-800 * (rpy[2] ** 2))
+        height_reward = np.exp(-800 * (desired_height - current_height) ** 2)
 
-        roll_reward = np.abs(rpy[0] - self.support_plane_estimated_roll)
-        pitch_reward = np.abs(rpy[1] - self.support_plane_estimated_pitch)
-        yaw_reward = np.abs(rpy[2])
+        # roll_reward = np.abs(rpy[0] - self.support_plane_estimated_roll)
+        # pitch_reward = np.abs(rpy[1] - self.support_plane_estimated_pitch)
+        # yaw_reward = np.abs(rpy[2])
 
         x = pos[0]
         x_last = self._last_base_position[0]
@@ -668,12 +697,12 @@ class SpotEnv(gym.Env):
         if done:
             reward = 0
         else:
-            # reward = round(yaw_reward, 4) + round(pitch_reward, 4) + round(roll_reward, 4) \
-            #          + round(height_reward, 4) + 100 * round(step_distance_x, 4)
+            reward = round(yaw_reward, 4) + round(pitch_reward, 4) + round(roll_reward, 4) \
+                     + round(height_reward, 4) + 100 * round(step_distance_x, 4)
 
-            reward_distance = 10 * step_distance_x
-            penalty = roll_reward + pitch_reward + 2 * yaw_reward
-            reward = reward_distance - penalty
+            # reward_distance = 10 * step_distance_x
+            # penalty = roll_reward + pitch_reward + 2 * yaw_reward
+            # reward = reward_distance - penalty
 
         # Penalize for standing at same position for continuous 150 steps
         # self.step_disp.append(step_distance_x)

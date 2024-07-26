@@ -6,14 +6,14 @@ import numpy as np
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('--PolicyDir', help='directory of the policy to be tested', type=str, default='12_07')
+    parser.add_argument('--PolicyDir', help='directory of the policy to be tested', type=str, default='24_07_5')
     parser.add_argument('--FrictionCoeff', help='foot friction value to be set', type=float, default=1.6)
     parser.add_argument('--WedgeIncline', help='wedge incline degree of the wedge', type=int, default=11)
     parser.add_argument('--WedgeOrientation', help='wedge orientation degree of the wedge', type=float, default=0)
     parser.add_argument('--MotorStrength', help='maximum motor Strength to be applied', type=float, default=7.0)
     parser.add_argument('--RandomTest', help='flag to sample test values randomly ', type=bool, default=False)
     parser.add_argument('--seed', help='seed for the random sampling', type=float, default=100)
-    parser.add_argument('--EpisodeLength', help='number of gait steps of a episode', type=int, default=700)
+    parser.add_argument('--EpisodeLength', help='number of gait steps of a episode', type=int, default=30000)
     parser.add_argument('--PerturbForce',
                         help='perturbation force to applied perpendicular to the heading direction of the robot',
                         type=float, default=0.0)
@@ -42,7 +42,7 @@ if __name__ == '__main__':
                        gait='trot',
                        imu_noise=args.AddImuNoise,
                        test=args.Test,
-                       default_pos=(-0.23, 0, 0.3))
+                       default_pos=(-0.27, 0, 0.2))
 
     if args.RandomTest:
         env.set_randomization(default=False)
@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
         # if i_step > 3500:
         #     yaw_cam = 50
-        # else:
+        # else:`
         #     yaw_cam = 0
 
         # if i_step % 100 == 0:

@@ -86,7 +86,7 @@ class WalkingController:
         self.back_right.theta = constrain_theta(theta + self._phase.back_right)
         self.back_left.theta = constrain_theta(theta + self._phase.back_left)
 
-    def initialize_elipse_shift(self, x_shift, y_shift):
+    def     initialize_elipse_shift(self, x_shift, y_shift):
         self.front_right.x_shift = x_shift[0]
         self.front_left.x_shift = x_shift[1]
         self.back_right.x_shift = x_shift[2]
@@ -114,11 +114,9 @@ class WalkingController:
 
         if test is False:
             leg_sl = action[:4]  # fr fl br bl
-            leg_sh = action[4:8]
 
             self._update_leg_step_length_val(leg_sl)
-            self._update_leg_step_height_val(leg_sh)
-            self.initialize_elipse_shift(action[8:12], action[12:16])
+            self.initialize_elipse_shift(action[4:8], action[8:12])
 
         return legs
 
@@ -133,17 +131,6 @@ class WalkingController:
         self.back_right.step_length = step_length[2]
         self.back_left.step_length = step_length[3]
 
-    def _update_leg_step_height_val(self, step_height):
-        """
-
-        :param step_height: step length of each leg trajectories
-        :return:
-        """
-        self.front_right.step_height = step_height[0]
-        self.front_left.step_height = step_height[1]
-        self.back_right.step_height = step_height[2]
-        self.back_left.step_height = step_height[3]
-
     def run_elliptical_traj_spot(self, theta, action):
         """
         Bộ điều khiển quỹ đạo bán-ellipse
@@ -156,6 +143,7 @@ class WalkingController:
 
         x_center = 0.02
         y_center = -0.29
+        step_height = 0.06
         x = y = 0
 
         for leg in legs:
@@ -168,7 +156,7 @@ class WalkingController:
                     flag = 0
                 else:
                     flag = 1
-                y = leg.step_height * np.sin(leg_theta) * flag + y_center + leg.y_shift
+                y = step_height * np.sin(leg_theta) * flag + y_center + leg.y_shift
 
             leg.x, leg.y = x, y
 
@@ -191,7 +179,7 @@ class WalkingController:
         legs = self.initialize_leg_state(theta, action=None, test=test)
 
         # Parameters for elip --------------------
-        step_length = 0.10
+        step_length = 0.07
         step_height = 0.05
         x_center = 0.02
         y_center = -0.29
